@@ -1,21 +1,22 @@
 {
   "name": "monorepo",
+  "type": "module",
   "version": "1.0.0",
   "private": true,
-  "type": "module",
   "packageManager": "pnpm@8.15.0",
   "description": "A monorepo project using pnpm workspace",
+  "author": "",
+  "license": "ISC",
+  "keywords": [],
   "scripts": {
     "preinstall": "npx only-allow pnpm",
     "dev": "pnpm -r run dev",
     "build": "pnpm -r run build",
     "test": "pnpm -r run test",
     "lint": "pnpm -r run lint",
-    "prepare": "husky"
+    "prepare": "husky",
+    "branch": "node scripts/safe-checkout.js"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
   "devDependencies": {
     "@antfu/eslint-config": "^3.0.0",
     "@commitlint/cli": "^18.0.0",
