@@ -1,0 +1,36 @@
+{
+  "name": "@monorepo/vite-config",
+  "version": "1.0.0",
+  "packageManager": "pnpm@8.15.0",
+  "description": "Shared Vite configuration for monorepo",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc"
+  },
+  "peerDependencies": {
+    "vite": "^5.0.0"
+  },
+  "dependencies": {
+    "@vitejs/plugin-vue": "^5.0.0",
+    "vite-plugin-dts": "^3.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@unocss/preset-uno": "^66.6.8",
+    "@unocss/transformer-attributify-jsx": "^66.6.8",
+    "@unocss/transformer-directives": "^66.6.8",
+    "typescript": "^5.3.0",
+    "unocss": "^66.6.8",
+    "unplugin-auto-import": "^21.0.0",
+    "unplugin-vue-components": "^32.0.0",
+    "vant": "^4.9.24"
+  }
+}

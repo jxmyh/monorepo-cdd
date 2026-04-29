@@ -1,0 +1,17 @@
+{
+  "name": "@monorepo/eslint-config",
+  "version": "1.0.0",
+  "packageManager": "pnpm@8.15.0",
+  "description": "Shared ESLint configuration for monorepo using @antfu/eslint-config",
+  "type": "module",
+  "main": "./index.js",
+  "exports": {
+    ".": "./index.js"
+  },
+  "peerDependencies": {
+    "eslint": "^9.0.0"
+  },
+  "dependencies": {
+    "@antfu/eslint-config": "^3.0.0"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "extends": "@monorepo/tsconfig/vue-app.json",
+  "compilerOptions": {
+    "baseUrl": "."
+  },
+  "references": [{ "path": "./tsconfig.node.json" }]
+}

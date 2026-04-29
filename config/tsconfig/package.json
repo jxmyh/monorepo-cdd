@@ -1,0 +1,13 @@
+{
+  "name": "@monorepo/tsconfig",
+  "version": "1.0.0",
+  "packageManager": "pnpm@8.15.0",
+  "description": "Shared TypeScript configurations for monorepo",
+  "license": "ISC",
+  "files": [
+    "base.json",
+    "vue-library.json",
+    "vue-app.json",
+    "node-library.json"
+  ]
+}
