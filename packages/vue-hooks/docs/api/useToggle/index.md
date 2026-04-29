@@ -61,18 +61,18 @@ const { value, toggle, setTrue, setFalse } = useToggle(true)
 
 ### 参数
 
-| 参数 | 类型 | 默认值 | 说明 |
-|------|------|--------|------|
+| 参数           | 类型      | 默认值  | 说明   |
+| -------------- | --------- | ------- | ------ |
 | `initialValue` | `boolean` | `false` | 初始值 |
 
 ### 返回值
 
-| 属性 | 类型 | 说明 |
-|------|------|------|
-| `value` | `Ref<boolean>` | 当前布尔值 |
-| `toggle` | `() => void` | 切换值（true ↔ false） |
-| `setTrue` | `() => void` | 设置为 true |
-| `setFalse` | `() => void` | 设置为 false |
+| 属性       | 类型           | 说明                   |
+| ---------- | -------------- | ---------------------- |
+| `value`    | `Ref<boolean>` | 当前布尔值             |
+| `toggle`   | `() => void`   | 切换值（true ↔ false） |
+| `setTrue`  | `() => void`   | 设置为 true            |
+| `setFalse` | `() => void`   | 设置为 false           |
 
 ## 特性
 
@@ -97,7 +97,7 @@ const { value: isVisible, toggle } = useToggle(false)
     <button @click="toggle">
       {{ isVisible ? 'Hide' : 'Show' }}
     </button>
-    
+
     <div v-if="isVisible">
       <p>This content is visible!</p>
     </div>

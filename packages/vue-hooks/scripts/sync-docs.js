@@ -5,8 +5,8 @@
  * 从 src/useXxx/index.md 复制到 docs/api/useXxx/index.md
  */
 
-import { readdirSync, statSync, copyFileSync, mkdirSync, existsSync } from 'node:fs'
-import { resolve, join } from 'node:path'
+import { copyFileSync, existsSync, mkdirSync, readdirSync, statSync } from 'node:fs'
+import { resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 const __filename = fileURLToPath(import.meta.url)
@@ -18,7 +18,7 @@ const docsApiDir = resolve(__dirname, '../docs/api')
 console.log('📚 Syncing hooks documentation...\n')
 
 // 获取所有 use* 目录
-const hookDirs = readdirSync(srcDir).filter((dir) => {
+const hookDirs = readdirSync(srcDir).filter(dir => {
   const fullPath = resolve(srcDir, dir)
   return dir.startsWith('use') && statSync(fullPath).isDirectory()
 })
@@ -30,7 +30,7 @@ if (hookDirs.length === 0) {
 
 console.log(`Found ${hookDirs.length} hook(s):\n`)
 
-hookDirs.forEach((hookName) => {
+hookDirs.forEach(hookName => {
   const srcMd = resolve(srcDir, hookName, 'index.md')
   const destDir = resolve(docsApiDir, hookName)
   const destMd = resolve(destDir, 'index.md')

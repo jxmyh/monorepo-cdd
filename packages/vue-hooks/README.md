@@ -18,20 +18,20 @@ pnpm add @monorepo/vue-hooks
 
 ```typescript
 interface UseCounterOptions {
-  initialValue?: number; // 初始值，默认 0
-  min?: number; // 最小值，默认 -Infinity
-  max?: number; // 最大值，默认 Infinity
-  step?: number; // 步长，默认 1
+  initialValue?: number // 初始值，默认 0
+  min?: number // 最小值，默认 -Infinity
+  max?: number // 最大值，默认 Infinity
+  step?: number // 步长，默认 1
 }
 
 interface UseCounterReturn {
-  count: Ref<number>; // 当前计数值
-  increment: () => void; // 增加
-  decrement: () => void; // 减少
-  reset: () => void; // 重置
-  set: (value: number) => void; // 设置值
-  isMin: Ref<boolean>; // 是否达到最小值
-  isMax: Ref<boolean>; // 是否达到最大值
+  count: Ref<number> // 当前计数值
+  increment: () => void // 增加
+  decrement: () => void // 减少
+  reset: () => void // 重置
+  set: (value: number) => void // 设置值
+  isMin: Ref<boolean> // 是否达到最小值
+  isMax: Ref<boolean> // 是否达到最大值
 }
 ```
 
@@ -39,9 +39,9 @@ interface UseCounterReturn {
 
 ```vue
 <script setup lang="ts">
-import { useCounter } from "@monorepo/vue-hooks";
+import { useCounter } from '@monorepo/vue-hooks'
 
-const { count, increment, decrement } = useCounter();
+const { count, increment, decrement } = useCounter()
 </script>
 
 <template>
@@ -57,14 +57,14 @@ const { count, increment, decrement } = useCounter();
 
 ```vue
 <script setup lang="ts">
-import { useCounter } from "@monorepo/vue-hooks";
+import { useCounter } from '@monorepo/vue-hooks'
 
 const { count, increment, decrement, reset, set, isMin, isMax } = useCounter({
   initialValue: 10,
   min: 0,
   max: 100,
   step: 5,
-});
+})
 </script>
 
 <template>
@@ -73,8 +73,8 @@ const { count, increment, decrement, reset, set, isMin, isMax } = useCounter({
     <p>Min: {{ isMin }}</p>
     <p>Max: {{ isMax }}</p>
 
-    <button @click="increment" :disabled="isMax">+5</button>
-    <button @click="decrement" :disabled="isMin">-5</button>
+    <button :disabled="isMax" @click="increment">+5</button>
+    <button :disabled="isMin" @click="decrement">-5</button>
     <button @click="reset">Reset</button>
     <button @click="set(50)">Set to 50</button>
   </div>
@@ -106,16 +106,16 @@ const { count, increment, decrement, reset, set, isMin, isMax } = useCounter({
 
 #### 特性
 
-✅ **边界检查** - 自动限制在 min 和 max 范围内  
-✅ **响应式** - 基于 Vue 3 ref，完全响应式  
-✅ **类型安全** - 完整的 TypeScript 类型支持  
-✅ **灵活配置** - 支持自定义初始值、范围、步长  
+✅ **边界检查** - 自动限制在 min 和 max 范围内
+✅ **响应式** - 基于 Vue 3 ref，完全响应式
+✅ **类型安全** - 完整的 TypeScript 类型支持
+✅ **灵活配置** - 支持自定义初始值、范围、步长
 ✅ **状态查询** - 提供 isMin/isMax 计算属性
 
 #### 注意事项
 
-⚠️ 如果 `min > max`，会在控制台输出警告  
-⚠️ `initialValue` 会自动被限制在 `[min, max]` 范围内  
+⚠️ 如果 `min > max`，会在控制台输出警告
+⚠️ `initialValue` 会自动被限制在 `[min, max]` 范围内
 ⚠️ `increment` 和 `decrement` 不会超出边界
 
 ## 添加新的 Hook
@@ -123,27 +123,27 @@ const { count, increment, decrement, reset, set, isMin, isMax } = useCounter({
 在 `src/` 目录下创建新的 hook 文件，例如 `useToggle.ts`：
 
 ```typescript
-import { ref } from "vue";
+import { ref } from 'vue'
 
 export function useToggle(initialValue = false) {
-  const value = ref(initialValue);
+  const value = ref(initialValue)
 
   const toggle = () => {
-    value.value = !value.value;
-  };
+    value.value = !value.value
+  }
 
   return {
     value,
     toggle,
-  };
+  }
 }
 ```
 
 然后在 `src/index.ts` 中导出：
 
 ```typescript
-export { useCounter } from "./useCounter";
-export { useToggle } from "./useToggle";
+export { useCounter } from './useCounter'
+export { useToggle } from './useToggle'
 ```
 
 ## 开发

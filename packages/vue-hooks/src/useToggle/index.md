@@ -9,13 +9,13 @@
 ```typescript
 interface UseToggleReturn {
   /** 当前布尔值 */
-  value: Ref<boolean>;
+  value: Ref<boolean>
   /** 切换值 */
-  toggle: () => void;
+  toggle: () => void
   /** 设置为 true */
-  setTrue: () => void;
+  setTrue: () => void
   /** 设置为 false */
-  setFalse: () => void;
+  setFalse: () => void
 }
 ```
 
@@ -25,9 +25,9 @@ interface UseToggleReturn {
 
 ```vue
 <script setup lang="ts">
-import { useToggle } from "@monorepo/vue-hooks";
+import { useToggle } from '@monorepo/vue-hooks'
 
-const { value, toggle } = useToggle();
+const { value, toggle } = useToggle()
 </script>
 
 <template>
@@ -42,9 +42,9 @@ const { value, toggle } = useToggle();
 
 ```vue
 <script setup lang="ts">
-import { useToggle } from "@monorepo/vue-hooks";
+import { useToggle } from '@monorepo/vue-hooks'
 
-const { value, toggle, setTrue, setFalse } = useToggle(true);
+const { value, toggle, setTrue, setFalse } = useToggle(true)
 </script>
 
 <template>
@@ -87,15 +87,15 @@ const { value, toggle, setTrue, setFalse } = useToggle(true);
 
 ```vue
 <script setup lang="ts">
-import { useToggle } from "@monorepo/vue-hooks";
+import { useToggle } from '@monorepo/vue-hooks'
 
-const { value: isVisible, toggle } = useToggle(false);
+const { value: isVisible, toggle } = useToggle(false)
 </script>
 
 <template>
   <div>
     <button @click="toggle">
-      {{ isVisible ? "Hide" : "Show" }}
+      {{ isVisible ? 'Hide' : 'Show' }}
     </button>
 
     <div v-if="isVisible">
@@ -109,20 +109,20 @@ const { value: isVisible, toggle } = useToggle(false);
 
 ```vue
 <script setup lang="ts">
-import { useToggle } from "@monorepo/vue-hooks";
-import { watchEffect } from "vue";
+import { useToggle } from '@monorepo/vue-hooks'
+import { watchEffect } from 'vue'
 
-const { value: isDark, toggle } = useToggle(false);
+const { value: isDark, toggle } = useToggle(false)
 
 watchEffect(() => {
-  document.documentElement.classList.toggle("dark", isDark.value);
-});
+  document.documentElement.classList.toggle('dark', isDark.value)
+})
 </script>
 
 <template>
   <div>
     <button @click="toggle">
-      {{ isDark ? "☀️ Light Mode" : "🌙 Dark Mode" }}
+      {{ isDark ? '☀️ Light Mode' : '🌙 Dark Mode' }}
     </button>
   </div>
 </template>

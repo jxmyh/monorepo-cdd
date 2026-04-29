@@ -47,8 +47,8 @@ src/useCounter/
 `src/index.ts` 会自动导出所有 hooks：
 
 ```typescript
-export { useCounter } from "./useCounter";
-export type { UseCounterOptions, UseCounterReturn } from "./useCounter";
+export { useCounter } from './useCounter'
+export type { UseCounterOptions, UseCounterReturn } from './useCounter'
 // 添加新 hook 时，在这里添加导出
 ```
 
@@ -87,19 +87,19 @@ mkdir src/useToggle
 创建 `src/useToggle/index.ts`：
 
 ```typescript
-import { ref } from "vue";
+import { ref } from 'vue'
 
 export function useToggle(initialValue = false) {
-  const value = ref(initialValue);
+  const value = ref(initialValue)
 
   const toggle = () => {
-    value.value = !value.value;
-  };
+    value.value = !value.value
+  }
 
   return {
     value,
     toggle,
-  };
+  }
 }
 ```
 
@@ -116,9 +116,9 @@ export function useToggle(initialValue = false) {
 
 ```vue
 <script setup>
-import { useToggle } from "@monorepo/vue-hooks";
+import { useToggle } from '@monorepo/vue-hooks'
 
-const { value, toggle } = useToggle();
+const { value, toggle } = useToggle()
 </script>
 ```
 ````
