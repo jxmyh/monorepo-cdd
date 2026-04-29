@@ -3,8 +3,19 @@
 
 declare global {
   namespace JSX {
+    interface Element {}
+
+    interface ElementClass {}
     interface IntrinsicElements {
       [elem: string]: any
+    }
+    // 添加 children 和其他常用属性支持
+    interface IntrinsicAttributes {
+      children?: any
+      class?: string
+      style?: any
+      key?: any
+      ref?: any
     }
   }
 }

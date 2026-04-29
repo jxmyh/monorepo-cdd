@@ -17,6 +17,9 @@ importers:
       '@commitlint/config-conventional':
         specifier: ^18.0.0
         version: 18.6.3
+      '@vitejs/plugin-vue-jsx':
+        specifier: ^4.0.0
+        version: 4.2.0(vite@5.4.21)(vue@3.5.33)
       eslint:
         specifier: ^9.0.0
         version: 9.39.4
@@ -72,6 +75,9 @@ importers:
       '@vitejs/plugin-vue':
         specifier: ^5.0.0
         version: 5.2.4(vite@5.4.21)(vue@3.5.33)
+      '@vitejs/plugin-vue-jsx':
+        specifier: ^4.0.0
+        version: 4.2.0(vite@5.4.21)(vue@3.5.33)
       eslint:
         specifier: ^9.0.0
         version: 9.39.4
@@ -1947,7 +1953,6 @@ packages:
 
   /@rolldown/pluginutils@1.0.0-rc.17:
     resolution: {integrity: sha512-n8iosDOt6Ig1UhJ2AYqoIhHWh/isz0xpicHTzpKBeotdVsTEcxsSA/i3EVM7gQAj0rU27OLAxCjzlj15IWY7bg==}
-    dev: false
 
   /@rollup/pluginutils@5.3.0:
     resolution: {integrity: sha512-5EdhGZtnu3V88ces7s53hhfK5KSASnJZv8Lulpc04cWO3REESroJXg73DFsOmgbU2BhwV0E20bu2IDZb3VKW4Q==}
@@ -2823,7 +2828,6 @@ packages:
       vue: 3.5.33(typescript@5.9.3)
     transitivePeerDependencies:
       - supports-color
-    dev: false
 
   /@vitejs/plugin-vue@5.2.4(vite@5.4.21)(vue@3.5.33):
     resolution: {integrity: sha512-7Yx/SXSOcQq5HiiV3orevHUFn+pmMB4cgbEkDYgnkUWb0WfeQ/wa2yFv6D5ICiCQOVpjA7vYDXrC7AGO8yjDHA==}

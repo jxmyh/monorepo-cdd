@@ -1,3 +1,4 @@
+/** @jsxImportSource vue */
 import { computed, defineComponent, ref } from 'vue'
 
 // TypeScript 接口定义
@@ -30,7 +31,9 @@ export default defineComponent({
     const totalCount = computed(() => todos.value.length)
 
     const progress = computed(() => {
-      if (totalCount.value === 0) return 0
+      if (totalCount.value === 0) {
+        return 0
+      }
       return Math.round((completedCount.value / totalCount.value) * 100)
     })
 
@@ -78,8 +81,9 @@ export default defineComponent({
           {/* 输入框 */}
           <div class="flex gap-2 mb-4">
             <input
-              vModel={newTodo.value}
+              value={newTodo.value}
               onKeydown={handleKeydown}
+              onInput={(e: Event) => (newTodo.value = (e.target as HTMLInputElement).value)}
               type="text"
               placeholder="添加新的待办事项..."
               class="flex-1 px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-purple-500"
