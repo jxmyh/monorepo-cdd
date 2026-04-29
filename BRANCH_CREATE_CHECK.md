@@ -199,35 +199,12 @@ git push origin correct_name_v1.0.0_user
 
 ### 跳过检查（不推荐）
 
-**Linux/macOS (Bash/Zsh):**
-
 ```bash
 # 临时跳过
 SKIP_BRANCH_CHECK=true git checkout -b temp-branch
-```
 
-**Windows PowerShell:**
-
-```powershell
-# 方法 1: 在同一命令中设置
+# 或在 Windows PowerShell 中
 $env:SKIP_BRANCH_CHECK="true"; git checkout -b temp-branch
-
-# 方法 2: 先设置环境变量，再执行命令
-$env:SKIP_BRANCH_CHECK = "true"
-git checkout -b temp-branch
-
-# 方法 3: 使用 cmd.exe
-set SKIP_BRANCH_CHECK=true && git checkout -b temp-branch
-```
-
-**永久禁用（不推荐）：**
-
-```bash
-# 在 .bashrc 或 .zshrc 中添加（Linux/macOS）
-export SKIP_BRANCH_CHECK=true
-
-# 或在 PowerShell profile 中添加（Windows）
-$env:SKIP_BRANCH_CHECK = "true"
 ```
 
 ### 修改检查阈值
