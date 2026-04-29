@@ -4,6 +4,13 @@
 
 > **重要提示**: 本项目强制使用 pnpm 作为包管理工具。请勿使用 npm 或 yarn 安装依赖。
 
+## 📚 文档导航
+
+- **[QUICK_START.md](./QUICK_START.md)** - 团队规范化快速开始指南 ⭐
+- **[TEAM_GUIDELINES.md](./TEAM_GUIDELINES.md)** - 完整团队开发规范
+- **[BRANCH_NAMING_GUIDE.md](./BRANCH_NAMING_GUIDE.md)** - 分支命名规范快速参考 ⭐ 新增
+- **[apps/web-app/README.md](./apps/web-app/README.md)** - Web App 使用指南
+
 ## 项目结构
 
 ```

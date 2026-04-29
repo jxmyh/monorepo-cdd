@@ -1,0 +1,2 @@
+# 推送前检查分支名称规范
+node scripts/check-branch-name.js

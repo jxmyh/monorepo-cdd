@@ -1,0 +1,15 @@
+# post-checkout hook 参数:
+# $1 = 之前的 HEAD
+# $2 = 新的 HEAD  
+# $3 = 标志位 (1 = 分支切换, 0 = 文件检出)
+
+# 只在分支切换时检查（不是文件检出）
+if [ "$3" = "1" ]; then
+  # 检查是否是新创建的分支（之前 HEAD 是全零）
+  PREV_HEAD="$1"
+  
+  # 如果是新分支创建（全零表示没有之前的 commit）
+  if echo "$PREV_HEAD" | grep -q "^0000000"; then
+    node scripts/check-branch-on-create.js
+  fi
+fi
