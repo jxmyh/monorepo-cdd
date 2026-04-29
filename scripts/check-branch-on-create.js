@@ -7,7 +7,8 @@
  * 验证新创建的分支名称是否符合规范
  */
 
-const { execSync } = require('child_process')
+import { execSync } from 'child_process'
+import process from 'process'
 
 // 分支命名规则
 const BRANCH_PATTERN = /^[a-z0-9]+(_[a-z0-9-]+)*_v\d+\.\d+\.\d+_[a-z0-9]+$/
@@ -54,7 +55,7 @@ function validateBranchName(branchName) {
   }
 
   // 检查是否包含开发人员
-  if (!/_([a-z0-9]+)$/.test(branchName)) {
+  if (!/_[a-z0-9]+$/.test(branchName)) {
     errors.push('缺少开发人员姓名')
   }
 
