@@ -19,6 +19,16 @@ if [ "$3" = "1" ]; then
   
   # 如果 reflog 记录很少（<=2），可能是新创建的分支
   if [ "$REFLOG_COUNT" -le 2 ]; then
-    node scripts/check-branch-on-create.js
+    # 运行检查脚本，如果失败则删除分支
+    if ! node scripts/check-branch-on-create.js; then
+      echo ""
+      echo "🚫 由于分支名称不符合规范，正在删除该分支..."
+      git checkout - 2>/dev/null || git checkout main
+      git branch -D "$BRANCH_NAME"
+      echo "❌ 分支 '$BRANCH_NAME' 已被删除"
+      echo "💡 请使用正确的命名格式重新创建分支"
+      echo ""
+      exit 1
+    fi
   fi
 fi

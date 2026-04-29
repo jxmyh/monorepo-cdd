@@ -1,10 +1,10 @@
 #!/usr/bin/env node
 
 /**
- * 分支创建时检查脚本
+ * Git Checkout 包装器
  *
- * 在 git checkout -b 或 git branch 时触发
- * 验证新创建的分支名称是否符合规范
+ * 拦截 git checkout -b 命令，在创建分支前验证名称
+ * 如果不符合规范，拒绝创建分支
  */
 
 import { execSync } from 'child_process'
@@ -15,21 +15,6 @@ const BRANCH_PATTERN = /^[a-z0-9]+(_[a-z0-9-]+)*_v\d+\.\d+\.\d+_[a-z0-9]+$/
 
 // 允许的跳过检查的环境变量
 const SKIP_CHECK = process.env.SKIP_BRANCH_CHECK === 'true'
-
-/**
- * 获取当前分支名
- */
-function getCurrentBranch() {
-  try {
-    const branch = execSync('git rev-parse --abbrev-ref HEAD', {
-      encoding: 'utf-8',
-    }).trim()
-    return branch
-  } catch (error) {
-    console.error('❌ 无法获取当前分支名')
-    process.exit(1)
-  }
-}
 
 /**
  * 验证分支名称
@@ -112,29 +97,91 @@ function suggestFix(branchName) {
  * 主函数
  */
 function main() {
-  // 如果设置了跳过检查，直接通过
-  if (SKIP_CHECK) {
-    console.log('⚠️  跳过分支名称检查（SKIP_BRANCH_CHECK=true）')
-    process.exit(0)
+  const args = process.argv.slice(2)
+
+  // 解析参数，查找 -b 或 -B 选项
+  let branchName = null
+  let startPoint = null
+  let createAndCheckout = false
+  let otherArgs = []
+
+  for (let i = 0; i < args.length; i++) {
+    if (args[i] === '-b' || args[i] === '-B') {
+      createAndCheckout = true
+      if (i + 1 < args.length) {
+        branchName = args[i + 1]
+        i++
+      }
+    } else if (args[i].startsWith('-')) {
+      // 其他选项，保留
+      otherArgs.push(args[i])
+    } else {
+      // 位置参数
+      if (!branchName && createAndCheckout) {
+        // 已经有 -b 了，这是起始点
+        startPoint = args[i]
+      } else if (!branchName && !createAndCheckout) {
+        // 没有 -b，第一个参数是分支名（切换到已有分支）
+        branchName = args[i]
+      } else {
+        // 其他位置参数
+        otherArgs.push(args[i])
+      }
+    }
   }
 
-  const branchName = getCurrentBranch()
-  console.log(`\n🔍 检查新分支名称: ${branchName}`)
+  // 如果不是创建新分支（没有 -b），直接执行原生 git checkout
+  if (!createAndCheckout || !branchName) {
+    try {
+      const cmd = `git checkout ${args.join(' ')}`
+      execSync(cmd, {
+        encoding: 'utf-8',
+        stdio: 'inherit',
+      })
+      process.exit(0)
+    } catch (error) {
+      process.exit(1)
+    }
+  }
 
-  const result = validateBranchName(branchName)
+  console.log(`\n🔍 验证分支名称: ${branchName}`)
 
-  if (result.valid) {
-    console.log(`✅ ${result.message}\n`)
-    process.exit(0)
+  // 如果设置了跳过检查，直接通过
+  if (SKIP_CHECK) {
+    console.log('⚠️  跳过分支名称检查（SKIP_BRANCH_CHECK=true）\n')
   } else {
-    console.error(`\n❌ ${result.message}`)
-    showExamples()
-    suggestFix(branchName)
-    console.error('⚠️  提示：')
-    console.error('  如需跳过检查，设置环境变量：SKIP_BRANCH_CHECK=true')
-    console.error('  例如：SKIP_BRANCH_CHECK=true git checkout -b branch-name\n')
+    // 验证分支名称
+    const result = validateBranchName(branchName)
 
-    // 返回错误码，让 hook 可以删除分支
+    if (!result.valid) {
+      console.error(`\n❌ ${result.message}`)
+      showExamples()
+      suggestFix(branchName)
+      console.error('🚫 分支创建被拒绝！请先修正分支名称。\n')
+      process.exit(1)
+    }
+
+    console.log(`✅ ${result.message}\n`)
+  }
+
+  // 执行实际的 git checkout 命令
+  try {
+    const allArgs = ['-b', branchName, ...otherArgs]
+    if (startPoint) {
+      allArgs.push(startPoint)
+    }
+
+    const cmd = `git checkout ${allArgs.join(' ')}`
+    console.log(`📌 执行: ${cmd}\n`)
+    execSync(cmd, {
+      encoding: 'utf-8',
+      stdio: 'inherit',
+    })
+
+    console.log('\n✅ 分支创建成功！')
+    process.exit(0)
+  } catch (error) {
+    console.error('\n❌ Git 命令执行失败')
     process.exit(1)
   }
 }
