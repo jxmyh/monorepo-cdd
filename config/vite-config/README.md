@@ -17,7 +17,7 @@ pnpm add -D @monorepo/vite-config
 对于 Vue 3 应用（如 `apps/web-app`）：
 
 ```typescript
-import { createViteConfig } from "@monorepo/vite-config";
+import { createViteConfig } from '@monorepo/vite-config'
 
 export default createViteConfig({
   // 可以添加自定义配置
@@ -27,17 +27,17 @@ export default createViteConfig({
     },
     resolve: {
       alias: {
-        "@": "/src",
+        '@': '/src',
       },
     },
   },
-});
+})
 ```
 
 ### 2. 启用 Vant UI 组件库（按需引入）
 
 ```typescript
-import { createViteConfig } from "@monorepo/vite-config";
+import { createViteConfig } from '@monorepo/vite-config'
 
 export default createViteConfig({
   vant: true, // ⭐ 启用 Vant 按需引入
@@ -45,7 +45,7 @@ export default createViteConfig({
   custom: {
     // 自定义配置
   },
-});
+})
 ```
 
 **特性：**
@@ -60,7 +60,7 @@ export default createViteConfig({
 ```vue
 <script setup lang="ts">
 // 无需手动导入，自动识别
-const count = ref(0);
+const count = ref(0)
 </script>
 
 <template>
@@ -75,44 +75,95 @@ const count = ref(0);
 ### 3. 启用 UnoCSS（单独使用）
 
 ```typescript
-import { createViteConfig } from "@monorepo/vite-config";
+import { createViteConfig } from '@monorepo/vite-config'
 
 export default createViteConfig({
   unocss: true, // 只启用 UnoCSS
-});
+})
 ```
 
 **注意：** 需要在项目根目录创建 `uno.config.ts` 配置文件。
 
-### 4. 库模式配置
+### 4. 启用 Vue JSX/TSX 支持
+
+```typescript
+import { createViteConfig } from '@monorepo/vite-config'
+
+export default createViteConfig({
+  jsx: true, // ⭐ 启用 JSX/TSX 支持
+})
+```
+
+**特性：**
+
+- ✅ 支持在 `.tsx` 和 `.jsx` 文件中使用 Vue 组件
+- ✅ 支持 JSX 语法糖
+- ✅ 完整的 TypeScript 类型支持
+
+**使用示例：**
+
+```tsx
+// App.tsx
+import { defineComponent, ref } from 'vue'
+
+export default defineComponent({
+  setup() {
+    const count = ref(0)
+
+    return () => (
+      <div>
+        <h1>Count: {count.value}</h1>
+        <button onClick={() => count.value++}>Increment</button>
+      </div>
+    )
+  },
+})
+```
+
+### 5. 组合使用多个功能
+
+```typescript
+import { createViteConfig } from '@monorepo/vite-config'
+
+export default createViteConfig({
+  jsx: true, // JSX/TSX 支持
+  vant: true, // Vant 按需引入
+  unocss: true, // UnoCSS
+  custom: {
+    // 自定义配置
+  },
+})
+```
+
+### 6. 库模式配置
 
 对于需要构建为库的包（如 `packages/ui` 和 `packages/utils`）：
 
 ```typescript
-import { createViteConfig } from "@monorepo/vite-config";
-import { resolve } from "node:path";
+import { createViteConfig } from '@monorepo/vite-config'
+import { resolve } from 'node:path'
 
 export default createViteConfig({
   lib: true,
-  entry: resolve(__dirname, "src/index.ts"),
-  name: "MyLibrary",
-  external: ["vue"], // 可选，默认为 ['vue']
+  entry: resolve(__dirname, 'src/index.ts'),
+  name: 'MyLibrary',
+  external: ['vue'], // 可选，默认为 ['vue']
   // 可以添加自定义配置
   custom: {
     // 自定义配置
   },
-});
+})
 ```
 
-### 5. 使用快捷函数
+### 7. 使用快捷函数
 
 也可以使用快捷函数创建库配置：
 
 ```typescript
-import { createLibConfig } from "@monorepo/vite-config";
-import { resolve } from "node:path";
+import { createLibConfig } from '@monorepo/vite-config'
+import { resolve } from 'node:path'
 
-export default createLibConfig(resolve(__dirname, "src/index.ts"), "MyLibrary");
+export default createLibConfig(resolve(__dirname, 'src/index.ts'), 'MyLibrary')
 ```
 
 ## API
@@ -131,6 +182,7 @@ export default createLibConfig(resolve(__dirname, "src/index.ts"), "MyLibrary");
 - `options.custom` (UserConfig): 自定义配置，会与默认配置合并
 - `options.vant` (boolean): 是否启用 Vant UI 组件库（按需引入），默认为 `false`
 - `options.unocss` (boolean): 是否启用 UnoCSS 原子化 CSS，默认为 `false`
+- `options.jsx` (boolean): 是否启用 Vue JSX/TSX 支持，默认为 `false`
 
 **返回：**
 
@@ -164,6 +216,7 @@ export default createLibConfig(resolve(__dirname, "src/index.ts"), "MyLibrary");
 - ✅ **Vant 4.x 按需引入** - 自动识别并引入使用的组件
 - ✅ **UnoCSS 集成** - 原子化 CSS 引擎，极速开发体验
 - ✅ **自动导入** - Vue、Vue Router、Pinia API 自动导入
+- ✅ **JSX/TSX 支持** - 完整的 Vue JSX/TSX 开发体验
 
 ## 示例项目
 

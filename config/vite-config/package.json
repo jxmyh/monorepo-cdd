@@ -20,6 +20,7 @@
   },
   "dependencies": {
     "@vitejs/plugin-vue": "^5.0.0",
+    "@vitejs/plugin-vue-jsx": "^4.0.0",
     "vite-plugin-dts": "^3.0.0"
   },
   "devDependencies": {
