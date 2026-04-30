@@ -19,6 +19,8 @@ export default function createConfig(options = {}) {
       ...ignores,
     ],
     rules: {
+      // 禁用 jsx-one-expression-per-line 规则，避免与 Prettier 冲突
+      'style/jsx-one-expression-per-line': 'off',
       // 可以在这里添加自定义规则
       ...rules,
     },

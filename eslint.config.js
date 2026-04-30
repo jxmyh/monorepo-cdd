@@ -12,7 +12,10 @@ export default antfu({
     '**/scripts/**', // 忽略所有子包的 scripts 目录
     '**/STRUCTURE.md', // 忽略结构文档
   ],
-  rules: {},
+  rules: {
+    // 禁用 jsx-one-expression-per-line 规则，避免与 Prettier 冲突
+    'style/jsx-one-expression-per-line': 'off',
+  },
   // 与 Prettier 保持一致的配置
   stylistic: {
     semi: false, // 不使用分号
