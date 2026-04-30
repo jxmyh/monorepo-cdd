@@ -11,7 +11,9 @@ import { execSync } from 'child_process'
 import process from 'process'
 
 // 分支命名规则
-const BRANCH_PATTERN = /^[a-z0-9]+(_[a-z0-9-]+)*_v\d+\.\d+\.\d+_[a-z0-9]+$/
+// 支持格式：mpaPlugin_v1.0.0_jxmyh 或 apps_web-app_v1.0.0_zhangsan
+// 允许驼峰命名（camelCase/PascalCase），但建议尽量使用小写
+const BRANCH_PATTERN = /^[a-zA-Z][a-zA-Z0-9]*(_[a-zA-Z0-9-]+)*_v\d+\.\d+\.\d+_[a-zA-Z0-9]+$/
 
 // 允许的跳过检查的环境变量
 const SKIP_CHECK = process.env.SKIP_BRANCH_CHECK === 'true'
@@ -64,9 +66,9 @@ function validateBranchName(branchName) {
     errors.push('应使用下划线分隔各部分')
   }
 
-  // 检查是否全小写
+  // 检查是否全小写（警告但不阻止）
   if (/[A-Z]/.test(branchName)) {
-    errors.push('分支名称应全部小写')
+    console.log('⚠️  提示：分支名称包含大写字母，建议使用小写以提高兼容性')
   }
 
   return {
@@ -80,17 +82,19 @@ function validateBranchName(branchName) {
  */
 function showExamples() {
   console.log('\n📋 正确的分支命名示例：')
+  console.log('  ✅ mpaPlugin_v1.0.0_jxmyh')
   console.log('  ✅ apps_web-app_v1.0.0_zhangsan')
   console.log('  ✅ packages_ui_v2.1.0_lisi')
   console.log('  ✅ config_vite-config_v1.0.0_wangwu')
   console.log('  ✅ feature_user-login_v1.0.0_zhaoliu')
   console.log('  ✅ hotfix_login-bug_v1.0.1_chenqi')
   console.log('\n📝 格式说明：')
-  console.log('  <一级目录>_<可能二级>_<可能三级>_v<版本号>_<开发人员>')
-  console.log('  - 使用下划线 _ 分隔')
-  console.log('  - 全部小写')
+  console.log('  <模块名>_<可能二级>_<可能三级>_v<版本号>_<开发人员>')
+  console.log('  - 使用下划线 _ 分隔各部分')
+  console.log('  - 模块名可使用驼峰命名（如 mpaPlugin）或小写（如 web-app）')
   console.log('  - 必须包含版本号（vX.Y.Z）')
-  console.log('  - 必须包含开发人员姓名\n')
+  console.log('  - 必须包含开发人员姓名')
+  console.log('  - 建议使用小写以提高跨平台兼容性\n')
 }
 
 /**

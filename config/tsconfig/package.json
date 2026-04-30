@@ -6,8 +6,10 @@
   "license": "ISC",
   "files": [
     "base.json",
-    "vue-library.json",
+    "jsx-modules.d.ts",
+    "jsx.d.ts",
+    "node-library.json",
     "vue-app.json",
-    "node-library.json"
+    "vue-library.json"
   ]
 }
