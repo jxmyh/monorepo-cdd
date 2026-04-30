@@ -1,4 +1,5 @@
 import { createViteConfig } from '@monorepo/vite-config'
+import { createMpaPlugin } from 'vite-plugin-virtual-mpa'
 
 export default createViteConfig({
   // 启用 Vant、UnoCSS 和 JSX/TSX 支持
@@ -8,12 +9,35 @@ export default createViteConfig({
   // 可以添加自定义配置
   custom: {
     // 例如:server, resolve, css 等配置
-    // 打包到二级目录 html/Vue3Test/gitjs
-    base: '/html/Vue3Test/gitjs/',
     server: {
       port: 3000,
     },
-    // ⚠️ 不推荐: 指定 index.html 的位置
-    // root: 'public', // 如果 index.html 在 public 目录
+    plugins: [
+      createMpaPlugin({
+        htmlMinify: true,
+        template: `public/index.html`,
+        scanOptions: {
+          scanDirs: 'src/pages',
+          entryFile: 'main.ts',
+          filename: name => `${name}.html`,
+        },
+      }),
+      // createMpaPlugin({
+      //   pages: [
+      //     {
+      //       name: 'home',
+      //       entry: '/src/pages/home/main.ts', // 入口文件
+      //       filename: 'home.html', // 输出文件名
+      //       template: './pages/home.html', // HTML 模板
+      //     },
+      //     {
+      //       name: 'about',
+      //       entry: '/src/pages/about/main.ts',
+      //       filename: 'about.html',
+      //       template: './pages/about.html',
+      //     },
+      //   ],
+      // }),
+    ],
   },
 })

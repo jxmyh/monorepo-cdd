@@ -7,11 +7,8 @@
     // Vant UI 组件支持
     "fishku.vant-snippets", // Vant 代码片段
 
-    // ESLint 和代码质量
-    "dbaeumer.vscode-eslint", // ESLint 集成
-
-    // 格式化（可选，ESLint 已包含大部分功能）
-    "esbenp.prettier-vscode", // Prettier 格式化器
+    // ESLint 和代码质量（ESLint 现在处理所有格式化）
+    "dbaeumer.vscode-eslint", // ESLint 集成（包含格式化功能）
 
     // TypeScript 增强
     "christian-kohler.path-intellisense", // 路径智能提示

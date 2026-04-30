@@ -22,7 +22,7 @@ export default defineComponent({
       { id: 2, text: '学习 TSX', completed: false },
       { id: 3, text: '构建项目', completed: false },
     ])
-
+    const style = 'a:{color:red}'
     // 计算属性
     const completedCount = computed(() => {
       return todos.value.filter(todo => todo.completed).length
@@ -74,7 +74,7 @@ export default defineComponent({
 
     // TSX 渲染函数
     return () => (
-      <div class="tsx-example">
+      <div class="tsx-example" style={style}>
         <h2 class="text-2xl font-bold mb-4 text-purple-600">TSX 示例组件</h2>
 
         <div class="bg-white rounded-lg shadow-md p-6 mb-4">
@@ -161,8 +161,7 @@ export default defineComponent({
         <div class="bg-gray-50 rounded p-4 text-sm">
           <h3 class="font-semibold mb-2">TSX 特性：</h3>
           <ul class="list-disc list-inside space-y-1 text-gray-700">
-            <li>TypeScript 类型支持</li>
-            <li>接口定义和类型检查</li>
+            <li>TypeScript 类型支持</li><li>接口定义和类型检查</li>
             <li>泛型使用（如 ref&lt;TodoItem[]&gt;）</li>
             <li>完整的 IDE 智能提示</li>
             <li>编译时类型错误检测</li>
