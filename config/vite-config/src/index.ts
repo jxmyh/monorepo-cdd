@@ -103,11 +103,38 @@ export function createViteConfig(options: ViteConfigOptions = {}): UserConfig {
     plugins.push(
       Components({
         resolvers: [VantResolver()],
-        dts: true, // 生成类型声明文件
+        dirs: ['components', 'src/**/components', 'src/components'],
+        deep: true,
+        directoryAsNamespace: false,
+        extensions: ['vue', 'tsx', 'jsx'],
+        include: [
+          /\.[tj]sx?$/, // .ts, .tsx, .js, .jsx
+          /\.vue$/,
+          /\.vue\?vue/, // .vue
+          /\.md$/, // .md
+        ],
+        dts: './types/components.d.ts', // 生成类型声明文件
       }),
       AutoImport({
-        imports: ['vue', 'vue-router', 'pinia'],
-        dts: true, // 生成类型声明文件
+        include: [
+          /\.[tj]sx?$/, // .ts, .tsx, .js, .jsx
+          /\.vue$/,
+          /\.vue\?vue/, // .vue
+          /\.md$/, // .md
+        ],
+        imports: [
+          'vue',
+          'vue-router',
+          'pinia',
+          '@vueuse/core', // 自动引入 VueUse
+          {
+            axios: [
+              // default imports
+              ['default', 'axios'], // import { default as axios } from 'axios',
+            ],
+          },
+        ],
+        dts: './types/auto-imports.d.ts', // 生成类型声明文件
       }),
     )
   }
