@@ -19,7 +19,7 @@ export default function createConfig(options = {}) {
       ...ignores,
     ],
     rules: {
-      // 禁用 jsx-one-expression-per-line 规则，避免与 Prettier 冲突
+      // 禁用 jsx-one-expression-per-line 规则，避免与格式化冲突
       'style/jsx-one-expression-per-line': 'off',
       // 可以在这里添加自定义规则
       ...rules,
@@ -27,11 +27,17 @@ export default function createConfig(options = {}) {
     settings: {
       ...settings,
     },
-    // 与 Prettier 保持一致的配置
+    // 代码样式配置
     stylistic: {
       semi: false, // 不使用分号
       quotes: 'single', // 单引号
       arrowParens: false, // 单参数箭头函数省略括号
+    },
+    // 启用格式化器支持（替代 Prettier）
+    formatters: {
+      css: true, // 格式化 CSS/SCSS/Less
+      html: true, // 格式化 HTML
+      markdown: true, // 格式化 Markdown
     },
   })
 }

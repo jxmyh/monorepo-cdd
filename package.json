@@ -26,6 +26,7 @@
     "@commitlint/config-conventional": "^18.0.0",
     "@vitejs/plugin-vue-jsx": "^4.0.0",
     "eslint": "^9.0.0",
+    "eslint-plugin-format": "^2.0.1",
     "husky": "^9.0.0",
     "less": "^4.2.0",
     "lint-staged": "^15.0.0",
@@ -36,12 +37,8 @@
     "vue": "^3.4.0"
   },
   "lint-staged": {
-    "*.{js,jsx,ts,tsx,vue}": [
-      "eslint --fix",
-      "prettier --write"
-    ],
-    "*.{json,md}": [
-      "prettier --write"
+    "*.{js,jsx,ts,tsx,vue,css,scss,less,html,json,md}": [
+      "eslint --fix"
     ]
   }
 }
