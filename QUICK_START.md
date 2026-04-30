@@ -203,44 +203,87 @@ feature_user-login_v1.0.0_zhaoliu
 
 **详细文档：** [TEAM_GUIDELINES.md - 分支管理规范](./TEAM_GUIDELINES.md#-分支管理规范)
 
-#### Git Flow 简化版
+---
 
+### ✅ 6. 开发工具与特性
+
+#### JSX/TSX 支持
+
+项目完全支持在 Vue 3 中使用 JSX/TSX 语法：
+
+**使用方式：**
+
+```tsx
+/** @jsxImportSource vue */
+import { defineComponent, ref } from 'vue'
+
+export default defineComponent({
+  setup() {
+    const count = ref(0)
+    
+    return () => (
+      <div>
+        <h1>计数: {count.value}</h1>
+        <button onClick={() => count.value++}>增加</button>
+      </div>
+    )
+  },
+})
 ```
-main (生产)
-  ↑
-release/* (发布)
-  ↑
-develop (开发)
-  ↑
-feature/* (功能)
-hotfix/* (热修复)
+
+**注意事项：**
+- 文件顶部必须添加 `/** @jsxImportSource vue */` 注释
+- 使用 `.tsx` 或 `.jsx` 扩展名
+- TypeScript 类型检查正常工作
+- 支持所有 Vue 3 特性
+
+**详细文档：** [TEAM_GUIDELINES.md - JSX/TSX 规范](./TEAM_GUIDELINES.md)
+
+#### VueUse 自动引入
+
+VueUse composables 已配置自动引入，无需手动 import：
+
+**使用示例：**
+
+```vue
+<script setup>
+// 直接使用，无需 import
+const { x, y } = useMouse()
+const { width, height } = useWindowSize()
+const isDark = useDark()
+</script>
+
+<template>
+  <div>
+    <p>鼠标位置: {{ x }}, {{ y }}</p>
+    <p>窗口大小: {{ width }} x {{ height }}</p>
+  </div>
+</template>
 ```
 
-#### 分支命名
+**支持的库：**
+- ✅ `@vueuse/core` - 核心 composables
+- ✅ `vue` - Vue API
+- ✅ `vue-router` - 路由 API
+- ✅ `pinia` - 状态管理
 
-- 功能分支: `feature/user-login`
-- 修复分支: `fix/login-bug`
-- 发布分支: `release/v1.0.0`
-- 热修复: `hotfix/critical-error`
+**类型定义：** 自动生成到 `types/auto-imports.d.ts`
 
-#### 工作流程
+#### Vant UI 组件库
 
-```bash
-# 1. 创建功能分支
-git checkout develop
-git checkout -b feature/new-feature
+Vant 4.x 已配置按需引入：
 
-# 2. 开发和提交
-git add .
-git commit -m "feat: implement feature"
+```vue
+<script setup>
+// 自动引入，无需手动 import
+const onClick = () => {
+  showToast('点击了按钮')
+}
+</script>
 
-# 3. 推送并创建 PR
-git push origin feature/new-feature
-
-# 4. Code Review 后合并到 develop
-
-# 5. 删除功能分支
-git branch -d feature/new-feature
+<template>
+  <van-button type="primary" @click="onClick">按钮</van-button>
+</template>
 ```
 
 ---

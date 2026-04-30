@@ -7,5 +7,5 @@
     "types": ["vite/client", "csstype"]
   },
   "references": [{ "path": "./tsconfig.node.json" }],
-  "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue", "src/**/*.d.ts", "types/**/*.d.ts"]
+  "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue", "src/**/*.d.ts", "types/**/*.d.ts", "../../config/tsconfig/jsx.d.ts", "../../config/tsconfig/env.d.ts"]
 }
