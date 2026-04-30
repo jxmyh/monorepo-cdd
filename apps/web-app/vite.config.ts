@@ -14,21 +14,30 @@ export default createViteConfig({
     },
     plugins: [
       createMpaPlugin({
-        pages: [
-          {
-            name: 'home',
-            entry: '/src/pages/home/main.ts', // 入口文件
-            filename: 'home.html', // 输出文件名
-            template: './pages/home.html', // HTML 模板
-          },
-          {
-            name: 'about',
-            entry: '/src/pages/about/main.ts',
-            filename: 'about.html',
-            template: './pages/about.html',
-          },
-        ],
+        htmlMinify: true,
+        template: `public/index.html`,
+        scanOptions: {
+          scanDirs: 'src/pages',
+          entryFile: 'main.ts',
+          filename: name => `${name}.html`,
+        },
       }),
+      // createMpaPlugin({
+      //   pages: [
+      //     {
+      //       name: 'home',
+      //       entry: '/src/pages/home/main.ts', // 入口文件
+      //       filename: 'home.html', // 输出文件名
+      //       template: './pages/home.html', // HTML 模板
+      //     },
+      //     {
+      //       name: 'about',
+      //       entry: '/src/pages/about/main.ts',
+      //       filename: 'about.html',
+      //       template: './pages/about.html',
+      //     },
+      //   ],
+      // }),
     ],
   },
 })
