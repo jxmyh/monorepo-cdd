@@ -14,6 +14,7 @@ declare module 'vue' {
   export interface GlobalComponents {
     JsxExample: typeof import('./../src/components/JsxExample.jsx')['default']
     TsxExample: typeof import('./../src/components/TsxExample.tsx')['default']
+    VanButton: typeof import('vant/es')['Button']
     VueUseExample: typeof import('./../src/components/VueUseExample.vue')['default']
   }
 }
@@ -22,5 +23,6 @@ declare module 'vue' {
 declare global {
   const JsxExample: (typeof import('./../src/components/JsxExample.jsx'))['default']
   const TsxExample: (typeof import('./../src/components/TsxExample.tsx'))['default']
+  const VanButton: (typeof import('vant/es'))['Button']
   const VueUseExample: (typeof import('./../src/components/VueUseExample.vue'))['default']
 }

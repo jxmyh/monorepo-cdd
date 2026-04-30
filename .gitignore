@@ -36,3 +36,7 @@ coverage/
 # Temporary files
 *.tmp
 *.temp
+
+# Auto-generated type declaration files (root level, use types/ directory instead)
+/components.d.ts
+/auto-imports.d.ts

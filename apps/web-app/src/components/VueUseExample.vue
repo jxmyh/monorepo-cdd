@@ -1,15 +1,22 @@
 <script setup lang="ts">
 // ✅ VueUse 自动引入 - 无需手动 import
 // useMouse, useDark, useLocalStorage 等都可以直接使用
+// 注意: 如果自动导入不生效,可以手动导入
+import { useDraggable } from '@vueuse/core'
 
-const { x, y } = useMouse()
+const { x: mx, y: my } = useMouse()
 const isDark = useDark()
 const toggleDark = useToggle(isDark)
 
 const message = useLocalStorage('message', 'Hello VueUse!')
+const el = useTemplateRef<HTMLElement>('el')
+const { x, y, style } = useDraggable(el, {
+  initialValue: { x: 40, y: 40 },
+})
 </script>
 
 <template>
+  <div ref="el" :style="style" style="position: fixed">Drag me! I am at {{ x }}, {{ y }}</div>
   <div class="p-6">
     <h2 class="text-2xl font-bold mb-4">VueUse 自动引入示例</h2>
 
@@ -17,7 +24,7 @@ const message = useLocalStorage('message', 'Hello VueUse!')
       <!-- 鼠标位置 -->
       <div class="card">
         <h3 class="text-lg font-semibold mb-2">鼠标位置</h3>
-        <p>X: {{ x }}, Y: {{ y }}</p>
+        <p>X: {{ mx }}, Y: {{ my }}</p>
       </div>
 
       <!-- 暗黑模式 -->

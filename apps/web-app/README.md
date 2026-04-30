@@ -46,61 +46,78 @@ pnpm build
 
 ---
 
+### 目录结构
+
+apps/web-app/
+├── public/ ✨ 新增 - 公共资源
+├── src/
+│ ├── assets/ ✨ 新增 - 静态资源
+│ ├── components/ ✅ 已有 - 公共组件 (3个文件)
+│ ├── composables/ ✨ 新增 - 组合式函数 (含 index.ts)
+│ ├── layouts/ ✨ 新增 - 布局组件
+│ ├── pages/ ✨ 新增 - 页面组件
+│ ├── router/ ✨ 新增 - 路由配置
+│ ├── stores/ ✨ 新增 - Pinia 状态管理
+│ ├── styles/ ✨ 新增 - 全局样式 (含 index.css)
+│ ├── utils/ ✨ 新增 - 工具函数 (含 index.ts)
+│ ├── App.vue ✅ 已有 - 根组件
+│ ├── main.ts ✅ 已更新 - 引入全局样式
+│ └── README.md ✨ 新增 - 目录说明文档
+├── types/ ✅ 已有 - 类型声明 (自动生成)
+└── 配置文件...
+
 ## ⚙️ 项目配置
 
 ### Vite 配置
 
 ```typescript
 // vite.config.ts
-import { createViteConfig } from "@monorepo/vite-config";
+import { createViteConfig } from '@monorepo/vite-config'
 
 export default createViteConfig({
   vant: true, // 启用 Vant 按需引入
   unocss: true, // 启用 UnoCSS
   custom: {
-    base: "/html/Vue3Test/gitjs/",
+    base: '/html/Vue3Test/gitjs/',
     server: {
       port: 3000,
     },
   },
-});
+})
 ```
 
 ### UnoCSS 配置
 
 ```typescript
 // uno.config.ts
-import { defineConfig, presetUno, presetAttributify } from "unocss";
+import { defineConfig, presetUno, presetAttributify } from 'unocss'
 
 export default defineConfig({
   presets: [presetUno(), presetAttributify()],
   shortcuts: [
-    ["flex-center", "flex items-center justify-center"],
-    ["card", "bg-white rounded-lg shadow p-4"],
-    [
-      "btn-primary",
-      "px-4 py-2 rounded bg-blue-500 text-white hover:bg-blue-600",
-    ],
+    ['flex-center', 'flex items-center justify-center'],
+    ['card', 'bg-white rounded-lg shadow p-4'],
+    ['btn-primary', 'px-4 py-2 rounded bg-blue-500 text-white hover:bg-blue-600'],
   ],
   theme: {
     colors: {
-      primary: "#1989fa",
-      success: "#07c160",
-      warning: "#ff976a",
-      danger: "#ee0a24",
+      primary: '#1989fa',
+      success: '#07c160',
+      warning: '#ff976a',
+      danger: '#ee0a24',
     },
   },
-});
+})
 ```
 
 ### main.ts
 
 ```typescript
-import { createApp } from "vue";
-import App from "./App.vue";
-import "virtual:uno.css"; // 导入 UnoCSS
+import { createApp } from 'vue'
+import App from './App.vue'
+import 'virtual:uno.css' // 导入 UnoCSS
 
-createApp(App).mount("#app");
+createApp(App).mount('#app')
 ```
 
 ---
@@ -199,8 +216,8 @@ createApp(App).mount("#app");
 </van-tabs>
 
 <script setup lang="ts">
-import { ref } from "vue";
-const active = ref(0);
+import { ref } from 'vue'
+const active = ref(0)
 </script>
 ```
 
@@ -208,13 +225,13 @@ const active = ref(0);
 
 ```vue
 <script setup lang="ts">
-import type { FormInstance, FieldRule } from "vant";
+import type { FormInstance, FieldRule } from 'vant'
 
-const formRef = ref<FormInstance>();
-const rules: FieldRule[] = [{ required: true, message: "请填写用户名" }];
+const formRef = ref<FormInstance>()
+const rules: FieldRule[] = [{ required: true, message: '请填写用户名' }]
 
 async function onSubmit() {
-  await formRef.value?.validate();
+  await formRef.value?.validate()
   // 提交逻辑
 }
 </script>
@@ -283,14 +300,7 @@ async function onSubmit() {
 
 ```vue
 <template>
-  <div
-    flex="~"
-    items="center"
-    justify="center"
-    p="4"
-    bg="blue-500"
-    text="white"
-  >
+  <div flex="~" items="center" justify="center" p="4" bg="blue-500" text="white">
     Attribute Mode
   </div>
 </template>
@@ -348,16 +358,16 @@ async function onSubmit() {
 
 ```javascript
 // eslint.config.js
-import createConfig from "@monorepo/eslint-config";
+import createConfig from '@monorepo/eslint-config'
 
 export default createConfig({
   vue: true,
   typescript: true,
-  ignores: ["**/dist/**", "**/node_modules/**", "**/*.md"],
+  ignores: ['**/dist/**', '**/node_modules/**', '**/*.md'],
   rules: {
-    "no-console": "error", // console.log 会被视为错误
+    'no-console': 'error', // console.log 会被视为错误
   },
-});
+})
 ```
 
 ### 构建流程
@@ -493,10 +503,10 @@ pnpm dev
 
 ```typescript
 // ❌ 错误
-const count: string = 123;
+const count: string = 123
 
 // ✅ 正确
-const count: number = 123;
+const count: number = 123
 ```
 
 #### Vue 组件类型错误
@@ -504,10 +514,10 @@ const count: number = 123;
 ```vue
 <script setup lang="ts">
 // ❌ 错误：类型不匹配
-const message: number = "hello";
+const message: number = 'hello'
 
 // ✅ 正确
-const message: string = "hello";
+const message: string = 'hello'
 </script>
 ```
 
@@ -649,19 +659,19 @@ pnpm lint:fix && pnpm type-check
 
 ```vue
 <script setup lang="ts">
-import { ref } from "vue";
-import type { FormInstance } from "vant";
+import { ref } from 'vue'
+import type { FormInstance } from 'vant'
 
-const username = ref("");
-const password = ref("");
-const formRef = ref<FormInstance>();
+const username = ref('')
+const password = ref('')
+const formRef = ref<FormInstance>()
 
 async function onSubmit() {
-  await formRef.value?.validate();
-  console.log("提交", {
+  await formRef.value?.validate()
+  console.log('提交', {
     username: username.value,
     password: password.value,
-  });
+  })
 }
 </script>
 
@@ -670,12 +680,7 @@ async function onSubmit() {
     <!-- 1. 使用 vform 代码片段生成表单 -->
     <van-form ref="formRef" @submit="onSubmit">
       <!-- 2. 使用 vfield 代码片段生成字段 -->
-      <van-field
-        v-model="username"
-        label="用户名"
-        placeholder="请输入用户名"
-        required
-      />
+      <van-field v-model="username" label="用户名" placeholder="请输入用户名" required />
 
       <van-field
         v-model="password"
@@ -687,9 +692,7 @@ async function onSubmit() {
 
       <!-- 3. 使用 UnoCSS 添加间距 -->
       <div class="mt-4">
-        <van-button round block type="primary" native-type="submit">
-          提交
-        </van-button>
+        <van-button round block type="primary" native-type="submit"> 提交 </van-button>
       </div>
     </van-form>
   </div>
@@ -859,7 +862,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: "18"
+          node-version: '18'
 
       - name: Install pnpm
         uses: pnpm/action-setup@v2
