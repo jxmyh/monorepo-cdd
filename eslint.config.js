@@ -12,9 +12,7 @@ export default antfu({
     '**/scripts/**', // 忽略所有子包的 scripts 目录
     '**/STRUCTURE.md', // 忽略结构文档
   ],
-  rules: {
-    'no-console': 'warn', // console.log 视为警告而非错误
-  },
+  rules: {},
   // 与 Prettier 保持一致的配置
   stylistic: {
     semi: false, // 不使用分号

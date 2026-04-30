@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { Card } from '@monorepo/ui'
 import { useCounter, useToggle } from '@monorepo/vue-hooks'
+// @ts-expect-error - JSX module type declaration
 import JsxExample from './components/JsxExample.jsx'
 import TsxExample from './components/TsxExample.tsx'
 

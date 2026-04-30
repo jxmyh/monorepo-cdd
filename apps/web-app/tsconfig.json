@@ -4,7 +4,8 @@
     "jsx": "preserve",
     "jsxImportSource": "vue",
     "baseUrl": ".",
-    "types": ["vite/client", "vue/jsx", "csstype"]
+    "types": ["vite/client", "csstype"]
   },
-  "references": [{ "path": "./tsconfig.node.json" }]
+  "references": [{ "path": "./tsconfig.node.json" }],
+  "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue", "src/**/*.d.ts"]
 }
