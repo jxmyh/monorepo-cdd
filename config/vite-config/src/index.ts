@@ -113,7 +113,7 @@ export function createViteConfig(options: ViteConfigOptions = {}): UserConfig {
           /\.vue\?vue/, // .vue
           /\.md$/, // .md
         ],
-        dts: './types/components.d.ts', // 生成类型声明文件
+        dts: './components.d.ts', // 生成类型声明文件
       }),
       AutoImport({
         include: [
@@ -134,7 +134,7 @@ export function createViteConfig(options: ViteConfigOptions = {}): UserConfig {
             ],
           },
         ],
-        dts: './types/auto-imports.d.ts', // 生成类型声明文件
+        dts: './auto-imports.d.ts', // 生成类型声明文件
       }),
     )
   }
