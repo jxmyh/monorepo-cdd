@@ -4,6 +4,7 @@ import { useCounter, useToggle } from '@monorepo/vue-hooks'
 // @ts-expect-error - JSX module type declaration
 import JsxExample from './components/JsxExample.jsx'
 import TsxExample from './components/TsxExample.tsx'
+import VueUseExample from './components/VueUseExample.vue'
 
 // 传入自定义配置：初始值10，最小值0，最大值100
 const { count, increment, decrement, reset, isMin, isMax } = useCounter({
@@ -41,10 +42,13 @@ const { value: booleanValue, toggle: booleanValueToggle } = useToggle()
       </div>
 
       <!-- JSX 和 TSX 示例 -->
-      <div class="grid md:grid-cols-2 gap-6">
+      <div class="grid md:grid-cols-2 gap-6 mb-8">
         <JsxExample />
         <TsxExample />
       </div>
+
+      <!-- VueUse 自动引入示例 -->
+      <VueUseExample />
     </div>
   </div>
 </template>
