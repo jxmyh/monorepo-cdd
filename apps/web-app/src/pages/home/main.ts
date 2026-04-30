@@ -1,5 +1,5 @@
 import { createApp } from 'vue'
 import App from './App.vue'
-import '../../uno.config'
+import '../../../uno.config'
 
 createApp(App).mount('#app')
