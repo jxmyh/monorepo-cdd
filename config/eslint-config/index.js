@@ -5,13 +5,7 @@ import antfu from '@antfu/eslint-config'
  * @param options 配置选项
  */
 export default function createConfig(options = {}) {
-  const {
-    vue = true,
-    typescript = true,
-    ignores = [],
-    rules = {},
-    settings = {},
-  } = options
+  const { vue = true, typescript = true, ignores = [], rules = {}, settings = {} } = options
 
   return antfu({
     vue,
@@ -20,6 +14,8 @@ export default function createConfig(options = {}) {
       '**/node_modules/**',
       '**/dist/**',
       '**/.vitepress/cache/**',
+      '**/*.md',
+      '**/scripts/**',
       ...ignores,
     ],
     rules: {
@@ -28,6 +24,12 @@ export default function createConfig(options = {}) {
     },
     settings: {
       ...settings,
+    },
+    // 与 Prettier 保持一致的配置
+    stylistic: {
+      semi: false, // 不使用分号
+      quotes: 'single', // 单引号
+      arrowParens: false, // 单参数箭头函数省略括号
     },
   })
 }

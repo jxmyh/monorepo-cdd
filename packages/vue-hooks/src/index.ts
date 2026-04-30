@@ -3,7 +3,7 @@
 // Run "pnpm generate" to regenerate
 
 export { useCounter } from './useCounter'
-export { useToggle } from './useToggle'
-
 export type * from './useCounter'
+
+export { useToggle } from './useToggle'
 export type * from './useToggle'

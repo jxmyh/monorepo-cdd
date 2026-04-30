@@ -1,17 +1,17 @@
-import { ref, type Ref } from "vue";
+import { ref, type Ref } from 'vue'
 
 /**
  * useToggle 返回值
  */
 export interface UseToggleReturn {
   /** 当前布尔值 */
-  value: Ref<boolean>;
+  value: Ref<boolean>
   /** 切换值 */
-  toggle: () => void;
+  toggle: () => void
   /** 设置为 true */
-  setTrue: () => void;
+  setTrue: () => void
   /** 设置为 false */
-  setFalse: () => void;
+  setFalse: () => void
 }
 
 /**
@@ -30,33 +30,33 @@ export interface UseToggleReturn {
  * ```
  */
 export function useToggle(initialValue = false): UseToggleReturn {
-  const value = ref(initialValue);
+  const value = ref(initialValue)
 
   /**
    * 切换布尔值
    */
   const toggle = () => {
-    value.value = !value.value;
-  };
+    value.value = !value.value
+  }
 
   /**
    * 设置为 true
    */
   const setTrue = () => {
-    value.value = true;
-  };
+    value.value = true
+  }
 
   /**
    * 设置为 false
    */
   const setFalse = () => {
-    value.value = false;
-  };
+    value.value = false
+  }
 
   return {
     value,
     toggle,
     setTrue,
     setFalse,
-  };
+  }
 }

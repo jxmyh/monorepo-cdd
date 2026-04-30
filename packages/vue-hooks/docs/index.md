@@ -21,13 +21,13 @@ pnpm add @monorepo/vue-hooks
 
 ```vue
 <script setup lang="ts">
-import { useCounter } from "@monorepo/vue-hooks";
+import { useCounter } from '@monorepo/vue-hooks'
 
 const { count, increment, decrement } = useCounter({
   initialValue: 0,
   min: 0,
   max: 100,
-});
+})
 </script>
 
 <template>

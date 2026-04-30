@@ -1,8 +1,8 @@
 {
   "name": "@monorepo/utils",
+  "type": "module",
   "version": "1.0.0",
   "packageManager": "pnpm@8.15.0",
-  "type": "module",
   "description": "Utility functions for monorepo",
   "exports": {
     ".": {

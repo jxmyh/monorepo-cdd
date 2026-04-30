@@ -10,5 +10,7 @@ export default createConfig({
   ],
   rules: {
     'no-console': 'error',
+    // 禁用 jsx-one-expression-per-line 规则，避免与 Prettier 冲突
+    'style/jsx-one-expression-per-line': 'off',
   },
 })

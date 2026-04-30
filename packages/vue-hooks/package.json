@@ -1,12 +1,9 @@
 {
   "name": "@monorepo/vue-hooks",
+  "type": "module",
   "version": "1.0.0",
   "packageManager": "pnpm@8.15.0",
-  "type": "module",
   "description": "Vue 3 Composition API hooks for monorepo",
-  "main": "./src/index.ts",
-  "module": "./src/index.ts",
-  "types": "./src/index.ts",
   "exports": {
     ".": {
       "types": "./src/index.ts",
@@ -14,6 +11,9 @@
       "require": "./src/index.ts"
     }
   },
+  "main": "./src/index.ts",
+  "module": "./src/index.ts",
+  "types": "./src/index.ts",
   "scripts": {
     "generate": "node scripts/generate-exports.js",
     "prebuild": "pnpm generate",

@@ -18,21 +18,21 @@ touch src/useMyHook/index.test.ts  # 单元测试 ⭐
 `src/useMyHook/index.ts`:
 
 ```typescript
-import { ref, type Ref } from "vue";
+import { ref, type Ref } from 'vue'
 
 export interface UseMyHookReturn {
-  value: Ref<string>;
-  update: (newValue: string) => void;
+  value: Ref<string>
+  update: (newValue: string) => void
 }
 
-export function useMyHook(initialValue = ""): UseMyHookReturn {
-  const value = ref(initialValue);
+export function useMyHook(initialValue = ''): UseMyHookReturn {
+  const value = ref(initialValue)
 
   const update = (newValue: string) => {
-    value.value = newValue;
-  };
+    value.value = newValue
+  }
 
-  return { value, update };
+  return { value, update }
 }
 ```
 

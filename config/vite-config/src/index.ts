@@ -1,64 +1,70 @@
-import { defineConfig, type UserConfig } from "vite";
-import vue from "@vitejs/plugin-vue";
-import dts from "vite-plugin-dts";
-import Unocss from "unocss/vite";
-import Components from "unplugin-vue-components/vite";
-import AutoImport from "unplugin-auto-import/vite";
-import { VantResolver } from "unplugin-vue-components/resolvers";
-import { resolve } from "node:path";
-import { fileURLToPath } from "node:url";
+import { resolve } from 'node:path'
+import vue from '@vitejs/plugin-vue'
+import vueJsx from '@vitejs/plugin-vue-jsx'
+import Unocss from 'unocss/vite'
+import AutoImport from 'unplugin-auto-import/vite'
+import { VantResolver } from 'unplugin-vue-components/resolvers'
+import Components from 'unplugin-vue-components/vite'
+import { defineConfig, type UserConfig } from 'vite'
+import dts from 'vite-plugin-dts'
 
 export interface ViteConfigOptions {
   /**
    * 是否为库模式构建
    * @default false
    */
-  lib?: boolean;
+  lib?: boolean
 
   /**
    * 库的入口文件（仅在 lib 模式下使用）
    */
-  entry?: string;
+  entry?: string
 
   /**
    * 库的名称（仅在 lib 模式下使用）
    */
-  name?: string;
+  name?: string
 
   /**
    * 外部依赖（仅在 lib 模式下使用）
    * @default ['vue']
    */
-  external?: string[];
+  external?: string[]
 
   /**
    * 是否生成类型声明文件（仅在 lib 模式下使用）
    * @default true
    */
-  dts?: boolean;
+  dts?: boolean
 
   /**
    * 自定义配置，会与默认配置合并
    */
-  custom?: UserConfig;
+  custom?: UserConfig
 
   /**
    * 是否优化 monorepo workspace 包（开发时直接引用源码）
    * @default true
    */
-  optimizeDeps?: boolean;
+  optimizeDeps?: boolean
 
   /**
    * 是否启用 Vant UI 组件库支持（按需引入）
    * @default false
    */
-  vant?: boolean;
+  vant?: boolean
 
   /**
    * 是否启用 UnoCSS 原子化 CSS 引擎
    * @default false
    */
-  unocss?: boolean;
+  unocss?: boolean
+
+  /**
+   * 是否启用 Vue JSX/TSX 支持
+   * @default false
+   */
+  jsx?: boolean
 }
 
 /**
@@ -70,20 +76,26 @@ export function createViteConfig(options: ViteConfigOptions = {}): UserConfig {
     lib = false,
     entry,
     name,
-    external = ["vue"],
+    external = ['vue'],
     dts: enableDts = true,
     custom = {},
     optimizeDeps: enableOptimizeDeps = true,
     vant = false,
     unocss = false,
-  } = options;
+    jsx = false,
+  } = options
 
   // 基础插件
-  const plugins: any[] = [vue()];
+  const plugins: any[] = [vue()]
+
+  // 启用 Vue JSX/TSX 支持
+  if (jsx) {
+    plugins.push(vueJsx())
+  }
 
   // 启用 UnoCSS
   if (unocss) {
-    plugins.push(Unocss());
+    plugins.push(Unocss())
   }
 
   // 启用 Vant 按需引入
@@ -94,10 +106,10 @@ export function createViteConfig(options: ViteConfigOptions = {}): UserConfig {
         dts: true, // 生成类型声明文件
       }),
       AutoImport({
-        imports: ["vue", "vue-router", "pinia"],
+        imports: ['vue', 'vue-router', 'pinia'],
         dts: true, // 生成类型声明文件
       }),
-    );
+    )
   }
 
   // 如果是库模式，添加 dts 插件
@@ -106,49 +118,49 @@ export function createViteConfig(options: ViteConfigOptions = {}): UserConfig {
       dts({
         insertTypesEntry: true,
       }),
-    );
+    )
   }
 
   // 基础配置
   const baseConfig: UserConfig = {
     plugins,
-  };
+  }
 
   // 如果是库模式，添加构建配置
   if (lib && entry) {
     baseConfig.build = {
       lib: {
         entry: resolve(entry),
-        name: name || "MonorepoLib",
-        formats: ["es", "cjs"],
-        fileName: (format) => `index.${format === "es" ? "mjs" : "js"}`,
+        name: name || 'MonorepoLib',
+        formats: ['es', 'cjs'],
+        fileName: format => `index.${format === 'es' ? 'mjs' : 'js'}`,
       },
       rollupOptions: {
         external,
         output: {
           globals: external.reduce(
             (acc, dep) => {
-              acc[dep] = dep.charAt(0).toUpperCase() + dep.slice(1);
-              return acc;
+              acc[dep] = dep.charAt(0).toUpperCase() + dep.slice(1)
+              return acc
             },
             {} as Record<string, string>,
           ),
         },
       },
-    };
+    }
   }
 
   // 开发时优化：将 @monorepo/* 包添加到 optimizeDeps.include
   // 这样 Vite 会预构建这些依赖，支持直接引用 TypeScript 源码
   if (enableOptimizeDeps && !lib) {
     baseConfig.optimizeDeps = {
-      include: ["@monorepo/ui", "@monorepo/utils"],
-    };
+      include: ['@monorepo/ui', '@monorepo/utils', '@monorepo/vue-hooks'],
+    }
 
     // 确保 SSR 时也包含这些依赖
     baseConfig.ssr = {
-      noExternal: ["@monorepo/ui", "@monorepo/utils"],
-    };
+      noExternal: ['@monorepo/ui', '@monorepo/utils', '@monorepo/vue-hooks'],
+    }
   }
 
   // 合并自定义配置
@@ -173,7 +185,7 @@ export function createViteConfig(options: ViteConfigOptions = {}): UserConfig {
             ],
           }
         : custom.optimizeDeps,
-  });
+  })
 }
 
 /**
@@ -181,22 +193,18 @@ export function createViteConfig(options: ViteConfigOptions = {}): UserConfig {
  */
 export const defaultConfig = defineConfig({
   plugins: [vue()],
-});
+})
 
 /**
  * 默认的库配置
  * @param entry 入口文件路径
  * @param name 库名称
  */
-export function createLibConfig(
-  entry: string,
-  name: string,
-  external: string[] = ["vue"],
-) {
+export function createLibConfig(entry: string, name: string, external: string[] = ['vue']) {
   return createViteConfig({
     lib: true,
     entry,
     name,
     external,
-  });
+  })
 }

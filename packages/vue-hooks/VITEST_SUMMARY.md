@@ -160,23 +160,23 @@ pnpm test src/useMyHook/index.test.ts
 使用清晰的中文描述：
 
 ```typescript
-it("应该使用默认值初始化", () => {});
-it("不应该超过最大值", () => {});
+it('应该使用默认值初始化', () => {})
+it('不应该超过最大值', () => {})
 ```
 
 ### 2. AAA 模式
 
 ```typescript
-it("应该能够增加计数", () => {
+it('应该能够增加计数', () => {
   // Arrange - 准备
-  const { count, increment } = useCounter();
+  const { count, increment } = useCounter()
 
   // Act - 执行
-  increment();
+  increment()
 
   // Assert - 断言
-  expect(count.value).toBe(1);
-});
+  expect(count.value).toBe(1)
+})
 ```
 
 ### 3. 测试独立性
@@ -193,12 +193,12 @@ it("应该能够增加计数", () => {
 ### 5. 测试错误处理
 
 ```typescript
-it("当配置无效时应该输出警告", () => {
-  const consoleSpy = vi.spyOn(console, "warn");
-  useCounter({ min: 100, max: 0 });
-  expect(consoleSpy).toHaveBeenCalled();
-  consoleSpy.mockRestore();
-});
+it('当配置无效时应该输出警告', () => {
+  const consoleSpy = vi.spyOn(console, 'warn')
+  useCounter({ min: 100, max: 0 })
+  expect(consoleSpy).toHaveBeenCalled()
+  consoleSpy.mockRestore()
+})
 ```
 
 ## 🔧 Vitest 配置
@@ -210,14 +210,14 @@ export default defineConfig({
   plugins: [vue()],
   test: {
     globals: true, // 全局 API
-    environment: "jsdom", // 浏览器环境
-    include: ["src/**/*.test.ts"],
+    environment: 'jsdom', // 浏览器环境
+    include: ['src/**/*.test.ts'],
     coverage: {
-      provider: "v8",
-      reporter: ["text", "json", "html"],
+      provider: 'v8',
+      reporter: ['text', 'json', 'html'],
     },
   },
-});
+})
 ```
 
 ## 📊 覆盖率目标
@@ -241,11 +241,11 @@ pnpm test:coverage
 
 ## ✨ 优势
 
-✅ **自动化** - 构建前自动运行测试（可配置）  
-✅ **快速** - Vitest 比 Jest 快 10-100 倍  
-✅ **简单** - 与 Vite 无缝集成  
-✅ **全面** - 支持覆盖率报告  
-✅ **友好** - 清晰的错误信息  
+✅ **自动化** - 构建前自动运行测试（可配置）
+✅ **快速** - Vitest 比 Jest 快 10-100 倍
+✅ **简单** - 与 Vite 无缝集成
+✅ **全面** - 支持覆盖率报告
+✅ **友好** - 清晰的错误信息
 ✅ **现代** - 原生 ESM 支持
 
 ## 🎉 总结

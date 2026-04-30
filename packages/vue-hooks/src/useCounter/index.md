@@ -9,13 +9,13 @@
 ```typescript
 interface UseCounterOptions {
   /** 初始值，默认为 0 */
-  initialValue?: number;
+  initialValue?: number
   /** 最小值，默认为 -Infinity */
-  min?: number;
+  min?: number
   /** 最大值，默认为 Infinity */
-  max?: number;
+  max?: number
   /** 步长，默认为 1 */
-  step?: number;
+  step?: number
 }
 ```
 
@@ -24,19 +24,19 @@ interface UseCounterOptions {
 ```typescript
 interface UseCounterReturn {
   /** 当前计数值 */
-  count: Ref<number>;
+  count: Ref<number>
   /** 增加计数 */
-  increment: () => void;
+  increment: () => void
   /** 减少计数 */
-  decrement: () => void;
+  decrement: () => void
   /** 重置为初始值 */
-  reset: () => void;
+  reset: () => void
   /** 设置为指定值 */
-  set: (value: number) => void;
+  set: (value: number) => void
   /** 是否达到最小值 */
-  isMin: Ref<boolean>;
+  isMin: Ref<boolean>
   /** 是否达到最大值 */
-  isMax: Ref<boolean>;
+  isMax: Ref<boolean>
 }
 ```
 
@@ -46,9 +46,9 @@ interface UseCounterReturn {
 
 ```vue
 <script setup lang="ts">
-import { useCounter } from "@monorepo/vue-hooks";
+import { useCounter } from '@monorepo/vue-hooks'
 
-const { count, increment, decrement } = useCounter();
+const { count, increment, decrement } = useCounter()
 </script>
 
 <template>
@@ -64,14 +64,14 @@ const { count, increment, decrement } = useCounter();
 
 ```vue
 <script setup lang="ts">
-import { useCounter } from "@monorepo/vue-hooks";
+import { useCounter } from '@monorepo/vue-hooks'
 
 const { count, increment, decrement, reset, set, isMin, isMax } = useCounter({
   initialValue: 10,
   min: 0,
   max: 100,
   step: 5,
-});
+})
 </script>
 
 <template>
@@ -80,8 +80,8 @@ const { count, increment, decrement, reset, set, isMin, isMax } = useCounter({
     <p>Min: {{ isMin }}</p>
     <p>Max: {{ isMax }}</p>
 
-    <button @click="increment" :disabled="isMax">+5</button>
-    <button @click="decrement" :disabled="isMin">-5</button>
+    <button :disabled="isMax" @click="increment">+5</button>
+    <button :disabled="isMin" @click="decrement">-5</button>
     <button @click="reset">Reset</button>
     <button @click="set(50)">Set to 50</button>
   </div>
@@ -135,12 +135,12 @@ const { count, increment, decrement, reset, set, isMin, isMax } = useCounter({
 
 ```vue
 <script setup lang="ts">
-import { useCounter } from "@monorepo/vue-hooks";
+import { useCounter } from '@monorepo/vue-hooks'
 
 const { count, increment, decrement } = useCounter({
   initialValue: 0,
   step: 10,
-});
+})
 </script>
 
 <template>
@@ -156,20 +156,20 @@ const { count, increment, decrement } = useCounter({
 
 ```vue
 <script setup lang="ts">
-import { useCounter } from "@monorepo/vue-hooks";
+import { useCounter } from '@monorepo/vue-hooks'
 
 const { count, increment, decrement, isMin, isMax } = useCounter({
   min: 0,
   max: 10,
-});
+})
 </script>
 
 <template>
   <div>
     <p>Count: {{ count }} / 10</p>
-    <progress :value="count" max="10"></progress>
-    <button @click="increment" :disabled="isMax">+</button>
-    <button @click="decrement" :disabled="isMin">-</button>
+    <progress :value="count" max="10" />
+    <button :disabled="isMax" @click="increment">+</button>
+    <button :disabled="isMin" @click="decrement">-</button>
   </div>
 </template>
 ```
