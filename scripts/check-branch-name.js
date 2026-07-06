@@ -16,7 +16,7 @@ import { execSync } from 'child_process'
 import process from 'process'
 
 // 分支命名规则
-const BRANCH_PATTERN = /^[a-z0-9]+(_[a-z0-9-]+)*_v\d+\.\d+\.\d+_[a-z0-9]+$/
+const BRANCH_PATTERN = /^[a-zA-Z0-9]+(_[a-zA-Z0-9-]+)*_v\d+\.\d+\.\d+_[a-zA-Z0-9]+$/;
 
 // 允许的跳过检查的环境变量
 const SKIP_CHECK = process.env.SKIP_BRANCH_CHECK === 'true'
