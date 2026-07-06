@@ -7,6 +7,7 @@ import { VantResolver } from 'unplugin-vue-components/resolvers'
 import Components from 'unplugin-vue-components/vite'
 import { defineConfig, type UserConfig } from 'vite'
 import dts from 'vite-plugin-dts'
+import { createMpaPlugin } from 'vite-plugin-virtual-mpa'
 
 export interface ViteConfigOptions {
   /**
@@ -147,6 +148,16 @@ export function createViteConfig(options: ViteConfigOptions = {}): UserConfig {
       }),
     )
   }
+  // 添加 MPA 插件
+  plugins.push(createMpaPlugin({
+    htmlMinify: true,
+    template: `public/index.html`,
+    scanOptions: {
+      scanDirs: 'src/pages',
+      entryFile: 'main.ts',
+      filename: name => `${name}.html`,
+    },
+  }))
 
   // 基础配置
   const baseConfig: UserConfig = {
